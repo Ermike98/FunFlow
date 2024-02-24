@@ -11,6 +11,7 @@ class Layer:
                  ):
         Layer._id = Layer._id + 1
         self.name = name if name is not None else f"{self.__class__.__name__}: {Layer._id}"
+        self.__id = Layer._id
 
         self.__debug = debug
 

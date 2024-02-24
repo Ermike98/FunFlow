@@ -130,7 +130,7 @@ class Layer:
     def _add_outputs(self, outputs: str | list[str]) -> Self:
         if isinstance(outputs, str):
             outputs = [outputs]
-        self._output_names = concat_list_without_duplicates(self._output_names, outputs, object_name='output')
+        self._output_names = concat_list_without_duplicates(self._output_names, outputs, object_name='outputs')
         return self
 
     def _add_inputs(self, inputs: str | Self | list[str | Self], *args, **kwargs) -> Self:

@@ -1,2 +1,2 @@
 from .functional import Functional
-from .map import Map
+# from .map import Map

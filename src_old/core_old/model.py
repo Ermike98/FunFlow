@@ -75,7 +75,7 @@ class Model(Layer):
 
         for layer_name in self.__topological_order:
             if self.debug():
-                print(f'Computing output for {layer_name}')
+                print(f'Computing outputs for {layer_name}')
 
             layer = self.__layers[layer_name]
             layer_args = (layers_results[parent_name] for parent_name in self.__layers_parents[layer_name])
@@ -86,13 +86,13 @@ class Model(Layer):
         for output_layer in self.__output_layers:
             if self.debug():
                 print(f'Current result dictionary: {result}')
-                print(f'Merging output of {output_layer.name}')
+                print(f'Merging outputs of {output_layer.name}')
 
             output_layer_result = layers_results[output_layer.name]
 
             overlapping_keys = overlapping_keys_in_dicts(result, output_layer_result)
             if overlapping_keys:
-                print(f'Warning: overlapping output keys! Keys {overlapping_keys} have already been used!')
+                print(f'Warning: overlapping outputs keys! Keys {overlapping_keys} have already been used!')
 
             result.update(output_layer_result)
 
