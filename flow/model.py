@@ -16,8 +16,8 @@ class Model(Layer):
             inputs=inputs,
             outputs=outputs,
             debug=debug,
-            raw_inputs=False,
-            raw_outputs=True
+            # input_type=None,
+            # output_type=None
         )
 
         if isinstance(layers, Layer):

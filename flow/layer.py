@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 
 class Layer:
@@ -9,8 +9,8 @@ class Layer:
                  name: str = None,
                  inputs: str | list[str] = None,
                  outputs: str | list[str] = None,
-                 raw_inputs: bool = False,
-                 raw_outputs: bool = False,
+                 input_type: Optional[str] = None,
+                 output_type: Optional[str] = None,
                  debug: bool = False
                  ):
         Layer._id = Layer._id + 1
@@ -20,8 +20,8 @@ class Layer:
         self._input_names = [inputs] if isinstance(inputs, str) else inputs
         self._output_names = [outputs] if isinstance(outputs, str) else outputs
 
-        self.__raw_inputs = raw_inputs
-        self.__raw_outputs = raw_outputs
+        # self.__raw_inputs = input_type == "raw"
+        # self.__raw_outputs = output_type == "raw"
 
         self.__debug = debug
 
@@ -35,13 +35,14 @@ class Layer:
             print(f"{self.name} Input: {kwargs}")
             print(f"Processing...")
 
-        call_arg = args
-        if kwargs:
-            call_arg = call_arg + (kwargs, )
+        # call_arg = args
+        # if kwargs:
+        #     call_arg = call_arg + (kwargs, )
 
-        results = self.call(*args, **kwargs) if not self.__raw_inputs else self.call(call_arg)
+        # results = self.call(*args, **kwargs) if not self.__raw_inputs else self.call(call_arg)
+        results = self.call(*args, **kwargs)
 
-        if self.__raw_outputs or self._output_names is None:
+        if self._output_names is None:
             if self.__debug:
                 print(f"{self.name} Output: {results}")
             return results
