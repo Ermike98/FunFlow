@@ -34,18 +34,18 @@ class Model(Layer):
     def call(self, **kwargs: Any) -> Any:
         state = dict()
         state.update(kwargs)
-        layers_queue = self._layers
+        layers_queue = list(self._layers)
         flag = True
 
         while layers_queue:
             for layer in layers_queue:
-                layer_input_names = layer.inputs
+                actual_layer_inputs = get_layer_inputs(layer, state.keys())
 
-                if set(layer_input_names).difference(state):
+                if actual_layer_inputs is None:
                     continue
 
                 layers_queue.remove(layer)
-                layer_inputs = {name: state[name] for name in layer_input_names}
+                layer_inputs = {name: state[name] for name in actual_layer_inputs}
                 layer_outputs = layer(**layer_inputs)
                 state.update(layer_outputs)
                 flag = False
@@ -59,6 +59,10 @@ class Model(Layer):
             return state
 
         return {name: state[name] for name in self._output_names}
+        return tuple(state[name] for name in self._output_names)
+        # return {name: state[name] for name in self._output_names}
+
+    # State keys, template inputs => actual inputs (subset of state keys), actual outputs || empty tuple if state does not contain all the variables needed
 
     def _update_io_names(self) -> Self:
         input_names_list = []
