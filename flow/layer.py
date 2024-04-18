@@ -1,4 +1,5 @@
 from abc import abstractmethod
+from pprint import pprint
 from typing import Any, Dict, Optional
 
 
@@ -32,8 +33,8 @@ class Layer:
     def __call__(self, *args, **kwargs: Any) -> Dict:
         if self.__debug:
             print(f"Executing layer: {self.name}")
-            print(f"{self.name} Input: {kwargs}")
-            print(f"Processing...")
+            print(f"- Input: {kwargs}")
+            print(f"- Processing...")
 
         # call_arg = args
         # if kwargs:
@@ -44,7 +45,7 @@ class Layer:
 
         if self._output_names is None:
             if self.__debug:
-                print(f"{self.name} Output: {results}")
+                print(f"- Output: {results}")
             return results
 
         if not isinstance(results, tuple):
@@ -53,16 +54,17 @@ class Layer:
         outputs = dict(zip(self._output_names, results))
 
         if self.__debug:
-            print(f"{self.name} Output: {outputs}")
+            print(f"- Output: {outputs}")
+            print(f"- End Processing {self.name}")
 
         return outputs
 
     @property
-    def inputs(self) -> list:
+    def inputs(self) -> list[str]:
         return self._input_names
 
     @property
-    def outputs(self) -> list:
+    def outputs(self) -> list[str]:
         return self._output_names
 
     def debug(self, debug: bool = None) -> bool:
