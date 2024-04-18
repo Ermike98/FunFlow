@@ -1,5 +1,5 @@
 from typing import Any, Self
-
+from .template_engine import get_layer_inputs
 from .layer import Layer
 
 
@@ -58,7 +58,6 @@ class Model(Layer):
         if self._output_names is None:
             return state
 
-        return {name: state[name] for name in self._output_names}
         return tuple(state[name] for name in self._output_names)
         # return {name: state[name] for name in self._output_names}
 

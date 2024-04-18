@@ -15,6 +15,7 @@ def get_layer_inputs(layer: Layer, state_names):
 
     return actual_layer_inputs
 
+
 def create_template_pattern_string(templates, layer_input: str):
     template_pattern_string = layer_input
     for template in templates:
