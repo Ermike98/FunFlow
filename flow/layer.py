@@ -23,6 +23,8 @@ class Layer:
 
         # self.__raw_inputs = input_type == "raw"
         # self.__raw_outputs = output_type == "raw"
+        self.__output_type = output_type if output_type is not None else "raw"
+        self.__input_type = input_type if output_type is not None else "raw"
 
         self.__debug = debug
 
@@ -43,12 +45,12 @@ class Layer:
         # results = self.call(*args, **kwargs) if not self.__raw_inputs else self.call(call_arg)
         results = self.call(*args, **kwargs)
 
-        if self._output_names is None:
+        if self._output_names is None or len(self._output_names) == 0 or self.__output_type != "raw":
             if self.__debug:
                 print(f"- Output: {results}")
             return results
 
-        if not isinstance(results, tuple):
+        if self.__output_type == "raw" and not isinstance(results, tuple):
             results = (results, )
 
         outputs = dict(zip(self._output_names, results))
