@@ -1,36 +1,20 @@
-# from src_old import Layer, Functional
 from flow import Functional, Model, Layer
 from pprint import pprint
 
-def f(x):
-    # print("x:", x)
-    return f"f-x:({x})", f"f-x:({x})", f"f-x:({x})"
+
+def f(**kwargs):
+    print(kwargs.keys())
+    return None
 
 
-def g(un):
-    # print("un:", un)
-    return f"g-un:({un})"
+load_X = Functional(f, debug=True, outputs=['X_train'], inputs=[])
+load_y = Functional(f, debug=True, outputs=['y_train'], inputs=[])
 
+# transform = Functional(f, debug=True, outputs=['X_train_norm'], inputs=['X_train'])
+model = Model([load_X, load_y], debug=True, outputs=['x', 'un', 'kwd'])
 
-def h(x, dos):
-    return f"h-x:({x})", f"h-dos:({dos})"
-
-
-def f_kwargs(**kwargs):
-    # print(kwargs)
-    return f"kwargs "
-
-
-
-
-# layer = Functional(f, debug=True, outputs=['output'], inputs="x", raw_inputs=False)
-layer2 = Functional(f, debug=True, outputs=['un', 'dos', 'tres'], inputs="x")
-# layer3 = Functional(g, debug=True, outputs=['un-un'], inputs='un')
-# layer4 = Functional(h, debug=True, outputs=['xx', "xdos"], inputs=['x', 'dos'])
-layer5 = Functional(f_kwargs, debug=True, outputs=['kwd'], inputs=['x', 'dos', 'un'])
-model = Model([layer2, layer5], debug=True, outputs=['x', 'un', 'kwd'])
-
-pprint(model(x=10))
+result = model(x=10)
+pprint()
 # layer = Functional(lambda x: x)
 # print(layer(10))
 # print(layer(10))
