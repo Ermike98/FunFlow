@@ -325,19 +325,28 @@ while remaining:
             remaining.remove(node)
             G.add_nodes_from([node.name.replace(" ", "\n")], layer=layer, color="lightblue")
 
-            G.add_nodes_from([out for out in node.actual_outputs if out not in values_included], layer=layer + 1,
+            G.add_nodes_from([out.replace(" ", "\n") for out in node.actual_outputs if out not in values_included], layer=layer + 1,
                              color="orange")
-            G.add_nodes_from([inp for inp in node.actual_inputs if inp not in values_included], layer=layer - 1,
+            G.add_nodes_from([inp.replace(" ", "\n") for inp in node.actual_inputs if inp not in values_included], layer=layer - 1,
                              color="orange")
 
             values_included.update(node.actual_outputs)
             values_included.update(node.actual_inputs)
 
-            G.add_edges_from(zip([node.name.replace(" ", "\n")] * len(node.actual_outputs), node.actual_outputs), layer=layer + 1)
-            G.add_edges_from(zip(node.actual_inputs, [node.name.replace(" ", "\n")] * len(node.actual_inputs)), layer=layer - 1)
+            G.add_edges_from(
+                zip([node.name.replace(" ", "\n")] * len(node.actual_outputs),
+                    map(lambda x: x.replace(" ", "\n"), node.actual_outputs)),
+                layer=layer + 1)
+            G.add_edges_from(
+                zip(map(lambda x: x.replace(" ", "\n"), node.actual_inputs),
+                    [node.name.replace(" ", "\n")] * len(node.actual_inputs)),
+                layer=layer - 1)
 
     layer += 2
     included_layer = []
+
+A = nx.nx_agraph.to_agraph(G)
+A.draw("graph_graphviz.pdf", prog="dot")
 
 colors = [data["color"] for v, data in G.nodes(data=True)]
 plt.figure(figsize=(75, 50))
