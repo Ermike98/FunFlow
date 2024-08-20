@@ -37,7 +37,7 @@ def process_node(node: Layer,
                  state_producers: dict,
                  user_inputs: dict
                  ):
-    node.init(state_producers, user_inputs)
+    node.init(user_inputs, state_producers)
 
     actual_outputs = node.actual_outputs
     actual_inputs = node.actual_inputs

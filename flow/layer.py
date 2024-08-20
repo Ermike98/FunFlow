@@ -44,8 +44,8 @@ class Layer:
             f"Allowed call types are 'auto', 'args', 'kwargs', 'tuple', 'dict' but got {call_type}"
         self.__call_type = call_type
 
-        self.__predecessors = None
-        self.__template_values = None
+        self.__predecessors = []
+        self.__template_values = dict()
         self.__actual_outputs = None
         self.__actual_inputs = None
 
@@ -66,13 +66,12 @@ class Layer:
 
         if self.actual_inputs is None or self.__actual_inputs is None:
             warnings.warn("You are calling a Layer that has not been initialized yet.", RuntimeWarning)
-            state_producers = {key: [None] for key in kwargs.keys()}
-            self.init(state_producers, kwargs)
+            self.init(kwargs)
 
         actual_input_names = self.actual_inputs
         actual_output_names = self.actual_outputs
 
-        assert actual_input_names is not None, f"The inputs provided do not match the expected input names"
+        # assert actual_input_names is not None, f"The inputs provided do not match the expected input names"
 
         results = None
         match self.__call_type:
@@ -114,7 +113,10 @@ class Layer:
         actual_outputs = find_actual_output_names(self.outputs, template_values)
         return actual_outputs
 
-    def init(self, state_producers: dict, state: dict) -> Self:
+    def init(self, state: dict, state_producers: dict[str, Self | None] = None) -> Self:
+        if state_producers is None:
+            state_producers = {key: [None] for key in state.keys()}
+
         actual_inputs = []
 
         template_values = dict()
@@ -127,7 +129,7 @@ class Layer:
             template_values.update(template_values_input)
 
             actual_input_names = [actual_name for actual_name in actual_input_names if
-                                  self not in state_producers[actual_name]]
+                                  state_producers[actual_name] is not None and self not in state_producers[actual_name]]
 
             actual_inputs.extend(actual_input_names)
 
@@ -147,7 +149,7 @@ class Layer:
         for actual_name in actual_input_names:
             predecessors_set.update(state_producers[actual_name])
 
-        return [predecessor for predecessor in predecessors_set if predecessor != self]
+        return [predecessor for predecessor in predecessors_set if predecessor is not None and predecessor != self]
 
     @property
     def inputs(self) -> list[str]:
