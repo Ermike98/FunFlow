@@ -15,7 +15,7 @@ class Layer:
                  outputs: str | list[str] = None,
                  input_type: Optional[str] = "kwargs",
                  output_type: Optional[str] = "auto",
-                 call_type: Optional[str] = "kwargs",
+                 call_type: Optional[str] = "auto",
                  debug: bool = False
                  ):
         Layer._id = Layer._id + 1
@@ -61,12 +61,14 @@ class Layer:
             print(f"- Input: {kwargs}")
             print(f"- Processing...")
 
-        if self.__input_type == "args":
+        if self.__input_type == "args" and self.__call_type != "auto":
             kwargs = dict(zip(self._input_names, args))
 
         if self.actual_inputs is None or self.__actual_inputs is None:
             warnings.warn("You are calling a Layer that has not been initialized yet.", RuntimeWarning)
-            self.init(kwargs)
+            user_inputs = kwargs.copy()
+            user_inputs.update({name: value for name, value in zip(self._input_names, args)})
+            self.init(user_inputs)
 
         actual_input_names = self.actual_inputs
         actual_output_names = self.actual_outputs

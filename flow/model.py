@@ -14,7 +14,8 @@ class Model(Layer):
             inputs=inputs,
             outputs=outputs,
             input_type="kwargs",
-            output_type="dict"
+            output_type="dict",
+            **kwargs
         )
 
         if isinstance(layers, Layer):
