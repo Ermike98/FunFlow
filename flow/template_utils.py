@@ -45,25 +45,39 @@ def find_actual_input_names(layer_input, state_names):
     return actual_names, template_values
 
 
-def replace_templates(name: str, templates: list[str], templates_value):
+def replace_templates(name: str, templates: list[str], templates_value: list[str]):
     for template, value in zip(templates, templates_value):
         name = name.replace(template, value)
 
     return name
 
 
-def find_actual_output_names(layer_outputs: list[str], template_values: dict[str, set[str]]):
+def find_and_replace_templates(name: str, templates_values: dict[str, str]) -> str:
+    template_pattern = r"{.*?}"
+    templates = re.findall(template_pattern, name)
+
+    if not templates:
+        return name
+
+    return replace_templates(name, templates, [templates_values[template] for template in templates])
+
+
+def multi_find_and_replace_templates(names: list[str], templates_value: dict[str, str]) -> list[str]:
+    return [find_and_replace_templates(name, templates_value) for name in names]
+
+
+def replace_multi_templates(names: list[str], template_values: dict[str, set[str] | list[str]]) -> list[str]:
     actual_outputs = []
     template_pattern = r"{.*?}"
 
-    for layer_output in layer_outputs:
-        templates = re.findall(template_pattern, layer_output)
+    for name in names:
+        templates = re.findall(template_pattern, name)
 
         if not templates:
-            actual_outputs.append(layer_output)
+            actual_outputs.append(name)
             continue
 
         for templates_value in itertools.product(*[template_values[template] for template in templates]):
-            actual_outputs.append(replace_templates(layer_output, templates, templates_value))
+            actual_outputs.append(replace_templates(name, templates, templates_value))
 
     return actual_outputs

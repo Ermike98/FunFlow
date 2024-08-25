@@ -61,7 +61,7 @@ def process_node(node: Layer,
 
         successors = find_node_successor(node, actual_outputs, ordered)
 
-        print(f"Successors: {list(map(lambda x: x.name, successors))}")  # DEBUG
+        # print(f"Successors: {list(map(lambda x: x.name, successors))}")  # DEBUG
         ordered.append(node)
 
         if successors:

@@ -1,7 +1,7 @@
 import warnings
 from abc import abstractmethod, ABC
 from typing import Any, Dict, Optional, Self
-from .template_utils import find_actual_input_names, find_actual_output_names
+from .template_utils import find_actual_input_names, replace_multi_templates
 
 
 # TODO: Implement input as list of layers, where all the outputs of the provided layers are taken in input
@@ -27,10 +27,11 @@ class Layer:
         else:
             self._input_names = []
 
-        if outputs is not None:
-            self._output_names = [outputs] if isinstance(outputs, str) else outputs
-        else:
-            self._output_names = []
+        self._output_names = [outputs] if isinstance(outputs, str) else outputs
+        # if outputs is not None:
+        #     self._output_names = [outputs] if isinstance(outputs, str) else outputs
+        # else:
+        #     self._output_names = []
 
         assert input_type in ["args", "kwargs"], \
             f"Allowed input types are 'args' and 'kwargs', but got {input_type}"
@@ -44,8 +45,8 @@ class Layer:
             f"Allowed call types are 'auto', 'args', 'kwargs', 'tuple', 'dict' but got {call_type}"
         self.__call_type = call_type
 
+        self._template_values = dict()
         self.__predecessors = []
-        self.__template_values = dict()
         self.__actual_outputs = None
         self.__actual_inputs = None
 
@@ -65,7 +66,7 @@ class Layer:
             kwargs = dict(zip(self._input_names, args))
 
         if self.actual_inputs is None or self.__actual_inputs is None:
-            warnings.warn("You are calling a Layer that has not been initialized yet.", RuntimeWarning)
+            # warnings.warn("You are calling a Layer that has not been initialized yet.", RuntimeWarning)
             user_inputs = kwargs.copy()
             user_inputs.update({name: value for name, value in zip(self._input_names, args)})
             self.init(user_inputs)
@@ -93,12 +94,17 @@ class Layer:
         if not actual_output_names:
             return dict()
 
+        if self.__output_type == "dict":
+            assert isinstance(results, dict), f'Output type set to "dict" but the result is of type {type(results)}'
+
+            if actual_output_names is None:
+                return results
+
+            return {output_name: results[output_name] for output_name in actual_output_names}
+
         if ((not hasattr(results, "__len__") or len(results) != len(actual_output_names))
                 and (self.__output_type == "raw" or self.__output_type == "auto")):
             results = (results,)
-
-        if self.__output_type == "dict" and isinstance(results, dict):
-            results = {results[output_name] for output_name in actual_output_names}
 
         assert len(results) == len(actual_output_names), \
             f"Expected {len(actual_output_names)} outputs, got {len(results)}"
@@ -111,8 +117,11 @@ class Layer:
 
         return outputs
 
-    def _get_actual_output_names(self, state: dict, template_values: dict[str, Any]) -> list[str]:
-        actual_outputs = find_actual_output_names(self.outputs, template_values)
+    def _get_actual_output_names(self, state: dict, template_values: dict[str, set[str]]) -> list[str] | None:
+        if self.outputs is None:
+            return None
+
+        actual_outputs = replace_multi_templates(self.outputs, template_values)
         return actual_outputs
 
     def init(self, state: dict, state_producers: dict[str, Self | None] = None) -> Self:
@@ -135,7 +144,7 @@ class Layer:
 
             actual_inputs.extend(actual_input_names)
 
-        self.__template_values = template_values
+        self._template_values = template_values
         self.__predecessors = self.__get_node_predecessors(actual_inputs, state_producers)
         self.__actual_inputs = actual_inputs
         self.__actual_outputs = self._get_actual_output_names(state, template_values)
