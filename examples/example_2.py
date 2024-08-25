@@ -1,6 +1,6 @@
 import time
 
-from flow import Functional
+from funflow import Functional
 
 # layer = Functional(lambda x, y: x + y, inputs=["x", "y"], outputs=["z"], input_type='args')
 layer = Functional(lambda *args: " ".join(args), outputs=["z"])

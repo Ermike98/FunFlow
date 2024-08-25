@@ -1,4 +1,4 @@
-from flow import Map
+from funflow import Map
 
 map_layer = Map(lambda string, n: string * n, inputs=["String {id}", "N {n}"], outputs=["{id}*{n}"])
 

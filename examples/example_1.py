@@ -1,4 +1,4 @@
-from flow import Layer, create_graph, topological_order_to_nx
+from funflow import Layer, create_graph, topological_order_to_nx
 from pprint import pprint
 import networkx as nx
 

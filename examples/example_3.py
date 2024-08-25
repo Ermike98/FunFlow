@@ -1,4 +1,4 @@
-from flow import Functional, Model
+from funflow import Functional, Model
 
 layers = [
     Functional(lambda x: x * 2, inputs=["x"], outputs=["y"]),

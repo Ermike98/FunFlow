@@ -1,4 +1,4 @@
-from flow import Functional, Model
+from funflow import Functional, Model
 from pprint import pprint
 
 def f(label="", **kwargs):
