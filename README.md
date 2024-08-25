@@ -1,2 +1,2 @@
-# Flow
-An easy to use library to create data pipeline for ML models
+# FunFlow
+An easy-to-use library to create complex modular pipelines.
