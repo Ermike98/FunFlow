@@ -66,7 +66,7 @@ def find_actual_output_names(layer_outputs, template_values):
     for layer_output in layer_outputs:
         templates = re.findall(template_pattern, layer_output)
 
-        # print(f"find_actual_output_names) layer_outputs: {layer_outputs}, template_values: {template_values}, templates: {templates}")
+        # print(f"replace_multi_templates) layer_outputs: {layer_outputs}, template_values: {template_values}, templates: {templates}")
 
         if not templates:
             actual_outputs.append(layer_output)
@@ -116,7 +116,7 @@ class Node:
             for actual_name in actual_input_names:
                 predecessors_set.update(state_producer[actual_name])
 
-        # actual_outputs.extend(find_actual_output_names(self.outputs, template_values))
+        # actual_outputs.extend(replace_multi_templates(self.outputs, template_values))
 
         self.actual_inputs = actual_inputs
         self.actual_outputs = find_actual_output_names(self.outputs, template_values)
