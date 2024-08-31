@@ -1,6 +1,6 @@
 from typing import Any, Self
 from .layer import Layer
-from .template_engine import create_graph
+from .template_engine import create_graph, topological_order_to_nx
 
 
 class Model(Layer):
@@ -45,3 +45,8 @@ class Model(Layer):
                 state.update(layer_outputs)
 
         return state
+
+    def create_graph(self, inputs: dict[str, Any]):
+        topological_order, state_producer = create_graph(self._layers, inputs)
+        G = topological_order_to_nx(topological_order)
+        return G
