@@ -81,12 +81,13 @@ def process_node(node: Layer,
     return False
 
 
-def create_graph(nodes: list[Layer], user_inputs: dict) -> tuple[list[list[Layer]], dict[str, list[Layer]]]:
+def create_graph(layers: list[Layer], user_inputs: dict) -> tuple[list[list[Layer]], dict[str, list[Layer]]]:
     state_producers = defaultdict(list)  # state[actual_input_name] => list of producers
 
     for _input in user_inputs.keys():
         state_producers[_input] = []
 
+    nodes = layers.copy()
     processing = nodes
     ordered = []
     quarantined = []
@@ -113,12 +114,12 @@ def ordered_to_leveled(ordered: list[Layer]) -> list[list[Layer]]:
 
     while remaining:
 
-        print(len(remaining))  # DEBUG
+        # print(len(remaining))  # DEBUG
 
         for layer in remaining.copy():
             if ((not any(map(lambda p: p in current_level_layers, layer.predecessors))) and
                     all(map(lambda p: p in already_included, layer.predecessors))):
-                print(layer)
+                # print(layer)
 
                 current_level_layers.append(layer)
                 already_included.append(layer)
@@ -143,12 +144,12 @@ def topological_order_to_nx(topological_order: list[list[Layer]]) -> nx.DiGraph:
     values_included = set()
 
     while remaining:
-        print(len(remaining))
+        # print(len(remaining))
 
         for node in remaining.copy():
             if ((not any(map(lambda p: p in included_layer, node.predecessors))) and
                     all(map(lambda p: p in included_graph, node.predecessors))):
-                print(node)
+                # print(node)
 
                 included_layer.append(node)
                 included_graph.append(node)
