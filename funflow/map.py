@@ -10,10 +10,14 @@ class Map(Layer):
                  inputs: list[str] = None,
                  outputs: list[str] = None,
                  map_over: list[str] = None,
+                 func_input_type: str = 'args',
+                 func_output_type: str = 'tuple',
                  **kwargs):
-        super().__init__(inputs=inputs, outputs=outputs, **kwargs, output_type="dict")
+        super().__init__(inputs=inputs, outputs=outputs, **kwargs, output_type="dict", call_type="kwargs")
         self.__func = func
         self.__map_over = map_over
+        self.__func_input_type = func_input_type
+        self.__func_output_type = func_output_type
 
     def call(self, **kwargs):
         if self.__map_over is not None:
@@ -33,13 +37,24 @@ class Map(Layer):
             template_values_dict.update({template: self._template_values[template] for template in excluded_templates})
 
             input_names = replace_multi_templates(self.inputs, template_values_dict)
-            outputs = self.__func(*(kwargs[input_name] for input_name in input_names))
+
+            outputs = None
+            if self.__func_input_type == "args":
+                outputs = self.__func(*(kwargs[input_name] for input_name in input_names))
+            elif self.__func_input_type == "kwargs":
+                outputs = self.__func(**{input_name: kwargs[input_name] for input_name in input_names})
+
             output_names = replace_multi_templates(self.outputs, template_values_dict)
 
-            if len(output_names) == 1:
+            if len(output_names) == 1 and self.__func_output_type == "tuple":
                 outputs = [outputs]
 
-            result.update(dict(zip(output_names, outputs)))
+            if outputs is not None:
+
+                if self.__func_output_type == "tuple":
+                    result.update(dict(zip(output_names, outputs)))
+                elif self.__func_output_type == "dict":
+                    result.update({output_name: outputs[output_name] for output_name in output_names})
 
         return result
         # self.__func(**kwargs)
