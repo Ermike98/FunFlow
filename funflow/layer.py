@@ -65,11 +65,11 @@ class Layer:
         if self.__input_type == "args" and self.__call_type != "auto":
             kwargs = dict(zip(self._input_names, args))
 
-        if self.actual_inputs is None or self.__actual_inputs is None:
-            # warnings.warn("You are calling a Layer that has not been initialized yet.", RuntimeWarning)
-            user_inputs = kwargs.copy()
-            user_inputs.update({name: value for name, value in zip(self._input_names, args)})
-            self.init(user_inputs)
+        # if self.actual_inputs is None or self.__actual_inputs is None:
+        # warnings.warn("You are calling a Layer that has not been initialized yet.", RuntimeWarning)
+        user_inputs = kwargs.copy()
+        user_inputs.update({name: value for name, value in zip(self._input_names, args)})
+        self.init(user_inputs)
 
         actual_input_names = self.actual_inputs
         actual_output_names = self.actual_outputs
