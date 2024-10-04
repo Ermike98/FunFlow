@@ -1,3 +1,5 @@
 .idea
 funflow.egg-info
 dist
+*.png
+*.pdf
