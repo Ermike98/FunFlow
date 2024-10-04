@@ -2,47 +2,17 @@ import re
 from collections import defaultdict
 import itertools
 
-
-def create_template_pattern_string(templates, layer_input: str):
-    template_pattern_string = layer_input
-    for template in templates:
-        template_pattern_string = template_pattern_string.replace(template, r"(.+)")
-
-    return "^" + template_pattern_string
+from .templates import Template, TemplateValue
 
 
-def find_actual_input_names(layer_input, state_names):
-    template_pattern = r"{.*?}"
-    templates = re.findall(template_pattern, layer_input)
+def find_actual_input_names(input_template: Template, state_names: list[str]) -> list[str] | None:
+    actual_names = [name for name in state_names if input_template.match(name)]
 
-    if not templates:
-        # There are no templates => the name of the input is equal to layer_input
-        if layer_input in state_names:
-            return [layer_input], {}
-        # Input is not available in the state
-        return None, None
-
-    pattern = create_template_pattern_string(templates, layer_input)
-    template_values = defaultdict(set)
-    actual_names = []
-
-    for name in state_names:
-        templates_value = re.findall(pattern, name)
-
-        if templates_value:
-            actual_names.append(name)
-
-            if len(templates) > 1:
-                templates_value = templates_value[0]
-
-            for value, template in zip(templates_value, templates):
-                template_values[template].add(value)
-
-    # Input is not available in the state
+    # No state name matches the template
     if not actual_names:
-        return None, None
+        return None
 
-    return actual_names, template_values
+    return actual_names
 
 
 def replace_templates(name: str, templates: list[str], templates_value: list[str]):
@@ -81,3 +51,20 @@ def replace_multi_templates(names: list[str], template_values: dict[str, set[str
             actual_outputs.append(replace_templates(name, templates, templates_value))
 
     return actual_outputs
+
+
+def create_tag_to_inputs_mapping(input_template_values: list[TemplateValue]) -> dict[str, set[TemplateValue]]:
+    tag_to_inputs = defaultdict(set)
+    for input_templ in input_template_values:
+        for tag in input_templ.tags:
+            tag_to_inputs[tag.name].add(input_templ)
+
+    return tag_to_inputs
+
+
+def create_name_to_inputs_mapping(input_template_values: list[TemplateValue]) -> dict[str, set[TemplateValue]]:
+    name_to_inputs = defaultdict(set)
+    for input_templ in input_template_values:
+        name_to_inputs[input_templ.name].add(input_templ)
+
+    return name_to_inputs

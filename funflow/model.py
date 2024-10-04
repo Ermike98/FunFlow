@@ -1,6 +1,7 @@
 from typing import Any, Self
 from .layer import Layer
 from .template_engine import create_graph, topological_order_to_nx
+from .templates import Template, TemplateValue
 
 
 class Model(Layer):
@@ -29,8 +30,7 @@ class Model(Layer):
         return self
 
     def call(self, **kwargs: Any) -> Any:
-        state = dict()
-        state.update(kwargs)
+        state = kwargs.copy()
 
         topological_order, state_producer = create_graph(self._layers, state)
 
@@ -40,7 +40,7 @@ class Model(Layer):
             for layer in layers:
                 actual_input_names = layer.actual_inputs
 
-                layer_inputs = {name: state[name] for name in actual_input_names}
+                layer_inputs = {str(name): state[str(name)] for name in actual_input_names}
                 layer_outputs = layer(**layer_inputs)
                 state.update(layer_outputs)
 

@@ -1,41 +1,35 @@
+import itertools
+from typing import Any
+
 from .layer import Layer
 from .template_utils import *
 import networkx as nx
 
 
-def is_any_in_input(input_names: list[str], other_names: list[str]) -> bool:
-    for input_name in input_names:
-
-        actual_input_names = find_actual_input_names(input_name, other_names)[0]
-        if actual_input_names is not None:
-            # print(f"input_name: {input_name}, actual_names: {actual_input_names}")
-            return True
-
-    return False
-
-
-def all_node_predecessor_are_ordered(node_actual_outputs: list[str], ordered: list[Layer]):
-    if node_actual_outputs is None:
-        return False
-
-    # this is true if none of node.actual_outputs is taken in input by any of the ordered nodes
-    for ordered_node in ordered:
-        if is_any_in_input(ordered_node.inputs, node_actual_outputs):
-            return False
-    return True
+def any_output_match_input_template(input_template: list[Template], output_template_values: list[TemplateValue]) -> bool:
+    return any(template.match(template_value)
+               for template, template_value in itertools.product(input_template, output_template_values))
+    # for input_name in input_template:
+    #
+    #     actual_input_names = find_actual_input_names(input_name, output_template_values)
+    #     if actual_input_names is not None:
+    #         # print(f"input_name: {input_name}, actual_names: {actual_input_names}")
+    #         return True
+    #
+    # return False
 
 
-def find_node_successor(node: Layer, node_actual_outputs: list[str], ordered: list[Layer]):
+def find_node_successor(node: Layer, ordered: list[Layer]):
     return [ordered_node for ordered_node in ordered
-            if node != ordered_node and is_any_in_input(ordered_node.inputs, node_actual_outputs)]
+            if node != ordered_node and any_output_match_input_template(ordered_node.inputs, node.actual_outputs)]
 
 
 def process_node(node: Layer,
                  ordered: list[Layer],
                  quarantined: list[Layer],
                  processing: list[Layer],
-                 state_producers: dict,
-                 user_inputs: dict
+                 state_producers: dict[str, list[Layer]],
+                 user_inputs: dict[str, Any],
                  ):
     node.init(user_inputs, state_producers)
 
@@ -56,10 +50,10 @@ def process_node(node: Layer,
     if actual_inputs is not None:
 
         for actual_name in actual_outputs:
-            if node not in state_producers[actual_name]:
-                state_producers[actual_name].append(node)
+            if node not in state_producers[str(actual_name)]:
+                state_producers[str(actual_name)].append(node)
 
-        successors = find_node_successor(node, actual_outputs, ordered)
+        successors = find_node_successor(node, ordered)
 
         # print(f"Successors: {list(map(lambda x: x.name, successors))}")  # DEBUG
         ordered.append(node)
@@ -150,29 +144,33 @@ def topological_order_to_nx(topological_order: list[list[Layer]]) -> nx.DiGraph:
             if ((not any(map(lambda p: p in included_layer, node.predecessors))) and
                     all(map(lambda p: p in included_graph, node.predecessors))):
                 # print(node)
+                input_names = list(map(str, node.actual_inputs))
+                output_names = list(map(str, node.actual_outputs))
 
                 included_layer.append(node)
                 included_graph.append(node)
                 remaining.remove(node)
                 G.add_nodes_from([node.name.replace(" ", "\n")], layer=layer, color="lightblue")
 
-                G.add_nodes_from([out.replace(" ", "\n") for out in node.actual_outputs if out not in values_included],
+                G.add_nodes_from([out.replace(" ", "\n")
+                                  for out in output_names if out not in values_included],
                                  layer=layer + 1,
                                  color="orange")
-                G.add_nodes_from([inp.replace(" ", "\n") for inp in node.actual_inputs if inp not in values_included],
+                G.add_nodes_from([inp.replace(" ", "\n")
+                                  for inp in input_names if inp not in values_included],
                                  layer=layer - 1,
                                  color="orange")
 
-                values_included.update(node.actual_outputs)
-                values_included.update(node.actual_inputs)
+                values_included.update(output_names)
+                values_included.update(input_names)
 
                 G.add_edges_from(
-                    zip([node.name.replace(" ", "\n")] * len(node.actual_outputs),
-                        map(lambda x: x.replace(" ", "\n"), node.actual_outputs)),
+                    zip([node.name.replace(" ", "\n")] * len(output_names),
+                        map(lambda x: x.replace(" ", "\n"), output_names)),
                     layer=layer + 1)
                 G.add_edges_from(
-                    zip(map(lambda x: x.replace(" ", "\n"), node.actual_inputs),
-                        [node.name.replace(" ", "\n")] * len(node.actual_inputs)),
+                    zip(map(lambda x: x.replace(" ", "\n"), input_names),
+                        [node.name.replace(" ", "\n")] * len(input_names)),
                     layer=layer - 1)
 
         layer += 2
