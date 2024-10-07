@@ -3,17 +3,17 @@ import setuptools
 
 setuptools.setup(
     name='funflow',
-    version='0.0.1',
+    version='0.0.2',
     description='Powerful dataflow programming library',
     long_description=pathlib.Path('README.md').read_text(),
     long_description_content_type='text/markdown',
-    url='https://github.com/MichelangeloSaveriano98/FunFlow',
+    url='https://github.com/Ermike98/FunFlow',
     author='Save',
     author_email='michelangelo.saveriano.1998@gmail.com',
     license='MIT',
     project_urls={
-        "Documentation": "https://github.com/MichelangeloSaveriano98/FunFlow",
-        "Source": "https://github.com/MichelangeloSaveriano98/FunFlow",
+        "Documentation": "https://github.com/Ermike98/FunFlow",
+        "Source": "https://github.com/Ermike98/FunFlow",
     },
     classifiers=[
         "License :: OSI Approved :: MIT License",
