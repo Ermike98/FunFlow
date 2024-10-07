@@ -104,16 +104,16 @@ class Layer:
                 args = (kwargs[input_name] for input_name in actual_input_names_str)
                 results = self.call(args)
 
-        if not actual_output_names_str:
-            return dict()
-
         if self.__output_type == "dict":
             assert isinstance(results, dict), f'Output type set to "dict" but the result is of type {type(results)}'
 
-            if actual_output_names_str is None:
+            if not self.outputs:
                 return results
 
-            return {output_name: results[output_name] for output_name in actual_output_names_str}
+            return {key: value
+                    for key, value in results.items()
+                    for output_templ in self._outputs
+                    if output_templ.match(key)}
 
         if ((not hasattr(results, "__len__") or len(results) != len(actual_output_names_str))
                 and (self.__output_type == "raw" or self.__output_type == "auto")):
