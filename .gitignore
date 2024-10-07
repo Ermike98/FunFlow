@@ -3,3 +3,4 @@ funflow.egg-info
 dist
 *.png
 *.pdf
+examples/.ipynb_checkpoints
