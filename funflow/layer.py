@@ -11,6 +11,9 @@ from pprint import pprint
 # TODO: Implement input as list of layers, where all the outputs of the provided layers are taken in input
 
 class Layer:
+    """
+    Abstract base class for all layers.
+    """
     _id = 0
 
     def __init__(self,
@@ -22,6 +25,16 @@ class Layer:
                  call_type: str = "auto",
                  debug: bool = False
                  ):
+        """
+
+        :param name: Name of the layer.
+        :param inputs:
+        :param outputs:
+        :param input_type:
+        :param output_type:
+        :param call_type:
+        :param debug:
+        """
         Layer._id = Layer._id + 1
         self.name = name if name is not None else f"{self.__class__.__name__}: {Layer._id}"
         self.__id = Layer._id
