@@ -1,5 +1,0 @@
-Advanced Topic
-==============
-
-How to create Custom Layers
----------------------------
