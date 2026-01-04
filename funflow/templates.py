@@ -131,6 +131,7 @@ class Template:
         return True
 
     def instantiate(self, tags: list[Tag | str]) -> TemplateValue | None:
+        instantiated_tags = []
         for tag in tags:
             if isinstance(tag, str):
                 tag = Tag(tag)
@@ -149,10 +150,12 @@ class Template:
             if tag.name in self.__tag_filters and not self.__tag_filters[tag.name].match(tag):
                 return None
 
-        if find_duplicate_tags(list(set(tags))):
+            instantiated_tags.append(tag)
+
+        if find_duplicate_tags(list(set(instantiated_tags))):
             return None
 
-        return TemplateValue(self.__name, self.tags + tags)
+        return TemplateValue(self.__name, self.tags + instantiated_tags)
 
     def __str__(self):
         substrings = [self.__name]

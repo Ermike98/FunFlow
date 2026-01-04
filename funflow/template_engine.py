@@ -53,10 +53,10 @@ def process_node(node: Layer,
             if node not in state_producers[str(actual_name)]:
                 state_producers[str(actual_name)].append(node)
 
-        successors = find_node_successor(node, ordered)
-
         # print(f"Successors: {list(map(lambda x: x.name, successors))}")  # DEBUG
         ordered.append(node)
+
+        successors = find_node_successor(node, ordered)
 
         if successors:
             quarantined.append(node)
@@ -86,6 +86,8 @@ def create_graph(layers: list[Layer], user_inputs: dict) -> tuple[list[list[Laye
     ordered = []
     quarantined = []
 
+    acc = 0
+
     while nodes:
         node = nodes.pop(0)
 
@@ -93,6 +95,13 @@ def create_graph(layers: list[Layer], user_inputs: dict) -> tuple[list[list[Laye
 
         if not result_processing:
             nodes.append(node)
+            acc += 1
+        else:
+            acc = 0
+
+        if len(nodes) > 0 and acc >= len(nodes):
+            raise Exception(f"Computation Graph creation failed: layers are not connected, "
+                            f"please double check inputs and outputs! Disconnected layers: {[n.name for n in nodes]}")
 
     layered = ordered_to_leveled(ordered)
 
