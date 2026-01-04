@@ -1,16 +1,13 @@
 import itertools
-import warnings
 from abc import abstractmethod, ABC
-from collections import defaultdict
-from typing import Any, Dict, Optional, Self
-from .template_utils import find_actual_input_names, replace_multi_templates, create_tag_to_inputs_mapping
+from typing import Any, Dict, Self
+from .template_utils import find_actual_input_names, create_tag_to_inputs_mapping
 from .templates import Template, TemplateValue
-from pprint import pprint
 
 
 # TODO: Implement input as list of layers, where all the outputs of the provided layers are taken in input
 
-class Layer:
+class Layer(ABC):
     """
     Abstract base class for all layers.
     """

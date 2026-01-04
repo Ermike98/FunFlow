@@ -1,7 +1,10 @@
-from typing import Any, Self
+from typing import Any
+try:
+    from typing import Self
+except ImportError:
+    from typing_extensions import Self
 from .layer import Layer
 from .template_engine import create_graph, topological_order_to_nx
-from .templates import Template, TemplateValue
 
 
 class Model(Layer):
