@@ -22,7 +22,18 @@ def find_duplicate_tags(tags: list[Tag]) -> list[str]:
 
 
 class TemplateValue:
+    """
+    Represents an instantiated input/output variable name with its associated tags.
+    (e.g., 'data, version: 1, type: raw')
+    """
+
     def __init__(self, name: str, tags: list[Tag] = None):
+        """
+        Initialize a TemplateValue.
+
+        :param name: The base name of the variable.
+        :param tags: A list of Tag objects associated with this variable.
+        """
         if tags is None:
             name, *tag_strings = name.split(TAG_SEPARATOR)
             tags = map(Tag, tag_strings)
@@ -37,10 +48,12 @@ class TemplateValue:
 
     @property
     def name(self) -> str:
+        """The base name of the variable."""
         return self.__name
 
     @property
     def tags(self) -> list[Tag]:
+        """A sorted list of Tag objects."""
         return list(self.__tags)
 
     def __str__(self):
@@ -66,6 +79,12 @@ class TemplateValue:
         return str(self) == str(other)
 
     def to_dict(self, include_name: bool = True):
+        """
+        Convert the TemplateValue to a dictionary mapping tag names to values.
+        
+        :param include_name: Whether to include the base name in the dictionary.
+        :return: A dictionary representation.
+        """
         d = dict(map(lambda x: (x.name, x.value), self.__tags))
         if include_name:
             d["name"] = self.__name
@@ -73,9 +92,21 @@ class TemplateValue:
         return d
 
 class Template:
+    """
+    Represents a pattern for matching and instantiating TemplateValues.
+    Used by Layers to specify dynamic inputs and outputs.
+    """
+
     def __init__(self, name: str,
                  tags: list[Tag] = None,
                  filters: list[TagFilter] = None):
+        """
+        Initialize a Template.
+
+        :param name: The base name to match.
+        :param tags: Static tags that will be added upon instantiation.
+        :param filters: Tag filters to matches against available input/output variables.
+        """
         name, *tag_strings = name.split(TAG_SEPARATOR)
         self.__name = name.strip()
 
@@ -101,6 +132,12 @@ class Template:
         self.__tag_filters = {tag_filter.name: tag_filter for tag_filter in filters}
 
     def match(self, templ_value: str | TemplateValue) -> bool:
+        """
+        Check if a TemplateValue (or its string representation) matches this pattern.
+
+        :param templ_value: The value to check.
+        :return: True if base name matches and all filters pass.
+        """
         if isinstance(templ_value, str):
             name, *tags = templ_value.split(TAG_SEPARATOR)
         else:  # isinstance(templ_value, TemplateValue)
@@ -110,6 +147,12 @@ class Template:
         return name.strip() == self.__name and self.match_tags(tags)
 
     def match_tags(self, tags: list[Tag | str]) -> bool:
+        """
+        Check if a set of tags satisfies all the filters in this template.
+
+        :param tags: The tags to check.
+        :return: True if all filters find a match, False otherwise.
+        """
         for tag_filter in self.tag_filters:
             if not any(map(tag_filter.match, tags)):
                 return False
@@ -131,6 +174,13 @@ class Template:
         return True
 
     def instantiate(self, tags: list[Tag | str]) -> TemplateValue | None:
+        """
+        Create a TemplateValue by merging these template's static tags 
+        with the provided tags, if they satisfy the filters.
+
+        :param tags: Dynamic tags from the state context.
+        :return: A TemplateValue if it matches filters, or None.
+        """
         instantiated_tags = []
         for tag in tags:
             if isinstance(tag, str):
@@ -178,18 +228,16 @@ class Template:
 
     @property
     def name(self) -> str:
+        """The base name of the template."""
         return self.__name
 
     @property
     def tags(self) -> list[Tag]:
+        """A list of static tags."""
         return list(self.__tags.values())
 
     @property
     def tag_filters(self) -> list[TagFilter]:
+        """A list of tag filters."""
         return list(self.__tag_filters.values())
 
-# "model,   version: 1, type: xgboost","model,   version: 2, type: random_forest",
-# "X_train, version: 1, dataset: raw", "X_train, version: 2, dataset: norm"
-# "y_pred, version: {}, type: {}, dataset: {}"
-# "y_pred, version: 1, type: xgboost, dataset: raw",
-# "y_pred, version: 2, type: random_forest, dataset: norm"
