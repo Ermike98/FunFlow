@@ -6,6 +6,11 @@ from .templates import Template, TemplateValue
 
 
 class GridMap(Layer):
+    """
+    A layer that executes its function over the Cartesian product of all possible combinations of inputs based on their tags.
+    Useful for batch processing or hyperparameter sweeps.
+    """
+
     def __init__(self,
                  func: Callable,
                  inputs: str | list[str] | Template | list[Template] = None,
@@ -14,6 +19,17 @@ class GridMap(Layer):
                  func_output_type: str = 'tuple',
                  include_tags: bool = False,
                  **kwargs):
+        """
+        Initialize a GridMap layer.
+
+        :param func: The function to execute.
+        :param inputs: Input templates to iterate over.
+        :param outputs: Output templates.
+        :param func_input_type: How inputs are passed to 'func' ('args' or 'kwargs').
+        :param func_output_type: Expected return type of 'func' ('tuple' or 'dict').
+        :param include_tags: If True, passes TemplateValue strings as keys to func when in 'kwargs' mode.
+        :param kwargs: Additional metadata for the Layer base class.
+        """
         super().__init__(inputs=inputs, outputs=outputs, **kwargs, output_type="dict", call_type="kwargs")
         self.__func = func
         self.__func_input_type = func_input_type
@@ -21,6 +37,9 @@ class GridMap(Layer):
         self.__include_tags = include_tags
 
     def call(self, **kwargs: Any):
+        """
+        Iterates over input combinations and collects results into the global state.
+        """
         kwargs = {str(TemplateValue(name)): value for name, value in kwargs.items()}
         input_template_values = list(map(TemplateValue, kwargs.keys()))
         name_to_template_values = create_name_to_inputs_mapping(input_template_values)
@@ -68,7 +87,9 @@ class GridMap(Layer):
         return result
 
     def _get_actual_outputs(self, state: dict[str, Any]) -> list[TemplateValue] | None:
-        # state = {str(TemplateValue(name)): value for name, value in state.items()}
+        """
+        Calculate all possible output variations based on existing input tags in the state.
+        """
         input_template_values = self.actual_inputs
         name_to_template_values = create_name_to_inputs_mapping(input_template_values)
 
@@ -85,5 +106,3 @@ class GridMap(Layer):
             actual_outputs.extend(output_template_values)
 
         return actual_outputs
-
-

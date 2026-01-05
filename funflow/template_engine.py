@@ -99,7 +99,7 @@ def create_graph(layers: list[Layer], user_inputs: dict) -> tuple[list[list[Laye
         else:
             acc = 0
 
-        if len(nodes) > 0 and acc >= len(nodes):
+        if acc >= len(nodes):
             raise Exception(f"Computation Graph creation failed: layers are not connected, "
                             f"please double check inputs and outputs! Disconnected layers: {[n.name for n in nodes]}")
 

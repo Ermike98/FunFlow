@@ -9,9 +9,10 @@ from .templates import Template, TemplateValue
 
 class Layer(ABC):
     """
-    Abstract base class for all layers.
+    Abstract base class for all layers in a FunFlow pipeline.
+    A layer defines a transformation from inputs to outputs.
     """
-    _id = 0
+    _id_counter = 0
 
     def __init__(self,
                  name: str = None,
@@ -23,101 +24,127 @@ class Layer(ABC):
                  debug: bool = False
                  ):
         """
+        Initialize a Layer.
 
-        :param name: Name of the layer.
-        :param inputs:
-        :param outputs:
-        :param input_type:
-        :param output_type:
-        :param call_type:
-        :param debug:
+        :param name: Unique name for the layer. If None, it's auto-generated.
+        :param inputs: Input names or templates required by this layer.
+        :param outputs: Output names or templates produced by this layer.
+
+        :param input_type: Defines how the layer instance receives inputs when called.
+            - "kwargs": Inputs are passed via keyword arguments (default).
+            - "args": Inputs are passed via positional arguments.
+
+        :param call_type: Defines how the internal `call` method is invoked.
+            - "auto": Tries passing inputs as keyword arguments first; falls back to positional.
+            - "kwargs": Passes inputs as individual keyword arguments (`call(**kwargs)`).
+            - "args": Passes inputs as individual positional arguments in the order defined 
+              by `actual_inputs` (`call(*args)`).
+            - "dict": Passes all inputs as a single dictionary argument (`call(data_dict)`).
+            - "tuple": Passes all inputs as a single tuple argument (`call(data_tuple)`).
+
+        :param output_type: Defines how the internal `call` method's return value is processed.
+            - "auto": Automatically detects if the output is a dictionary, tuple, or single value 
+              and maps it to defined outputs.
+            - "dict": Expects a dictionary where keys match output names.
+            - "tuple": Expects a tuple where elements match defined outputs in order.
+            - "raw": Similar to 'auto', but treats non-dict outputs as a single raw value or 
+              wraps them in a tuple for mapping.
+
+        :param debug: If True, enables execution logging for this layer.
         """
-        Layer._id = Layer._id + 1
-        self.name = name if name is not None else f"{self.__class__.__name__}: {Layer._id}"
-        self.__id = Layer._id
+        self._name = name or self.__class__.__name__
+        self._id = Layer._id_counter
+        Layer._id_counter += 1
 
-        if inputs is not None:
-            if not isinstance(inputs, list):
-                inputs = [inputs]
-            self._inputs: list[Template] = [_input if isinstance(_input, Template) else Template(_input)
-                                            for _input in inputs]
-        else:
-            self._inputs: list[Template] = []
+        if isinstance(inputs, str) or isinstance(inputs, Template):
+            inputs = [inputs]
+        elif inputs is None:
+            inputs = []
+        self._inputs = [Template(i) if isinstance(i, str) else i for i in inputs]
 
-        # self._outputs = [outputs] if isinstance(outputs, str) else outputs
-        if outputs is not None:
-            if not isinstance(outputs, list):
-                outputs = [outputs]
-            self._outputs: list[Template] = [_output if isinstance(_output, Template) else Template(_output)
-                                             for _output in outputs]
-        else:
-            self._outputs: list[Template] = []
+        if isinstance(outputs, str) or isinstance(outputs, Template):
+            outputs = [outputs]
+        elif outputs is None:
+            outputs = []
+        self._outputs = [Template(o) if isinstance(o, str) else o for o in outputs]
 
         assert input_type in ["args", "kwargs"], \
             f"Allowed input types are 'args' and 'kwargs', but got {input_type}"
-        self.__input_type = input_type
+        self._input_type = input_type
 
         assert output_type in ["auto", "raw", "tuple", "dict"], \
             f"Allowed output types are 'auto', 'raw', 'tuple' and 'dict', but got {output_type}"
-        self.__output_type = output_type
+        self._output_type = output_type
 
         assert call_type in ["auto", "args", "kwargs", "tuple", "dict"], \
             f"Allowed call types are 'auto', 'args', 'kwargs', 'tuple', 'dict' but got {call_type}"
-        self.__call_type = call_type
+        self._call_type = call_type
 
-        self._template_values = dict()
-        self.__predecessors = []
-        self.__actual_outputs = None
-        self.__actual_inputs = None
+        # These are set during initialization of the model
+        self._actual_inputs: list[TemplateValue] = []
+        self._actual_outputs: list[TemplateValue] = []
+        self._predecessors: list[Self] = []
 
-        self.__debug = debug
+        self._debug = debug
 
     @abstractmethod
     def call(self, *args: Any, **kwargs: Any) -> Any:
+        """
+        Perform the layer's transformation.
+        Should be implemented by subclasses.
+        """
         pass
 
     def __call__(self, *args, **kwargs: Any) -> Dict:
-        if self.__debug:
-            print(f"Executing layer: {self.name}")
+        """
+        Execute the layer. Handles input/output mapping and debug logging.
+        """
+        if self._debug:
+            print(f"Executing layer: {self._name}")
             print(f"- Input: {kwargs}")
             print(f"- Processing...")
 
-        if self.__input_type == "args" and self.__call_type != "auto":
-            kwargs = dict(zip(self._inputs, args))
+        # Standardize kwargs keys to strings
+        processed_kwargs = {str(TemplateValue(str(k))): v for k, v in kwargs.items()}
 
-        kwargs = {str(TemplateValue(key)): value for key, value in kwargs.items()}
+        if self._input_type == "args":
+            for i, arg_val in enumerate(args):
+                if i < len(self._inputs):
+                    processed_kwargs[str(self._inputs[i])] = arg_val
 
-        # if self.actual_inputs is None or self.__actual_inputs is None:
-        #     warnings.warn("You are calling a Layer that has not been initialized yet.", RuntimeWarning)
+        # Create state context for init
+        state = processed_kwargs.copy()
+        for i, arg_val in enumerate(args):
+            if i < len(self._inputs):
+                state[str(self._inputs[i])] = arg_val
 
-        user_inputs = kwargs.copy()
-        user_inputs.update({name: value for name, value in zip(self._inputs, args)})
-        self.init(user_inputs)
+        self.init(state)
 
-        actual_input_names_str = list(map(str, self.actual_inputs))
-        actual_output_names_str = list(map(str, self.actual_outputs))
-
-        # assert actual_input_names_str is not None, f"The inputs provided do not match the expected input names"
+        actual_input_names_str = list(map(str, self._actual_inputs))
+        actual_output_names_str = list(map(str, self._actual_outputs))
 
         results = None
-        match self.__call_type:
+        match self._call_type:
             case "auto":
-                results = self.call(*args, **kwargs)
+                if processed_kwargs:
+                    results = self.call(**processed_kwargs)
+                else:
+                    results = self.call(*args)
             case "kwargs":
-                results = self.call(**kwargs)
+                results = self.call(**processed_kwargs)
             case "dict":
-                results = self.call(kwargs)
+                results = self.call(processed_kwargs)
             case "args":
-                args = (kwargs[input_name] for input_name in actual_input_names_str)
-                results = self.call(*args)
+                call_args = [processed_kwargs[name] for name in actual_input_names_str]
+                results = self.call(*call_args)
             case "tuple":
-                args = (kwargs[input_name] for input_name in actual_input_names_str)
-                results = self.call(args)
+                call_args = tuple(processed_kwargs[name] for name in actual_input_names_str)
+                results = self.call(call_args)
 
-        if self.__output_type == "dict":
+        if self._output_type == "dict":
             assert isinstance(results, dict), f'Output type set to "dict" but the result is of type {type(results)}'
 
-            if not self.outputs:
+            if not self._outputs:
                 return results
 
             return {key: value
@@ -126,31 +153,31 @@ class Layer(ABC):
                     if output_templ.match(key)}
 
         if ((not hasattr(results, "__len__") or len(results) != len(actual_output_names_str))
-                and (self.__output_type == "raw" or self.__output_type == "auto")):
+                and (self._output_type == "raw" or self._output_type == "auto")):
             results = (results,)
 
         assert len(results) == len(actual_output_names_str), \
             f"Expected {len(actual_output_names_str)} outputs, got {len(results)}"
 
-        outputs = dict(zip(map(str, actual_output_names_str), results))
+        outputs = dict(zip(actual_output_names_str, results))
 
-        if self.__debug:
+        if self._debug:
             print(f"- Output: {outputs}")
-            print(f"- End Processing {self.name}")
+            print(f"- End Processing {self._name}")
 
         return outputs
 
     def _get_actual_outputs(self, state: dict) -> list[TemplateValue] | None:
+        """Determines the actual output names based on current state tags."""
         actual_outputs = []
 
-        input_template_values = list(map(TemplateValue, state.keys()))
+        input_template_values = [TemplateValue(str(k)) for k in state.keys()]
         tag_to_inputs = create_tag_to_inputs_mapping(input_template_values)
 
-        for output_template in self.outputs:
+        for output_template in self._outputs:
             tag_filters = output_template.tag_filters
 
             for input_templates_values in itertools.product(*[tag_to_inputs[tag_flt.name] for tag_flt in tag_filters]):
-                # print(input_templates_values)
                 tags = sum([value.tags for value in input_templates_values], [])
                 output_template_value = output_template.instantiate(tags)
 
@@ -160,28 +187,25 @@ class Layer(ABC):
         return actual_outputs
 
     def init(self, state: dict[str, Any], state_producers: dict[str, list[Self]] | None = None) -> Self:
+        """Initializes actual inputs and outputs based on context."""
         if state_producers is None:
             state_producers = {key: [] for key in state.keys()}
 
         actual_inputs = []
 
-        # template_values = dict()
         for input_template in self._inputs:
             actual_input_names = find_actual_input_names(input_template, list(state_producers.keys()))
 
             if actual_input_names is None:
                 return self
 
-            # template_values.update(template_values_input)
-
             actual_input_names = filter(lambda name: self not in state_producers[name], actual_input_names)
 
             actual_inputs.extend(actual_input_names)
 
-        # self._template_values = template_values
-        self.__predecessors = self.__get_node_predecessors(actual_inputs, state_producers)
-        self.__actual_inputs = list(map(TemplateValue, actual_inputs))
-        self.__actual_outputs = self._get_actual_outputs(state)
+        self._predecessors = self.__get_node_predecessors(actual_inputs, state_producers)
+        self._actual_inputs = [TemplateValue(n) for n in actual_inputs]
+        self._actual_outputs = self._get_actual_outputs(state)
 
         return self
 
@@ -194,36 +218,51 @@ class Layer(ABC):
         for actual_name in actual_input_names:
             predecessors_set.update(state_producers[actual_name])
 
-        # return [predecessor for predecessor in predecessors_set if predecessor is not None and predecessor != self]
         return [predecessor for predecessor in predecessors_set if predecessor != self]
 
     @property
+    def name(self) -> str:
+        """The name of the layer."""
+        return self._name
+
+    @property
+    def id(self) -> int:
+        """The unique ID of the layer."""
+        return self._id
+
+    @property
     def inputs(self) -> list[Template]:
+        """The input templates defined for this layer."""
         return self._inputs
 
     @property
     def outputs(self) -> list[Template]:
+        """The output templates defined for this layer."""
         return self._outputs
 
     @property
     def actual_inputs(self) -> list[TemplateValue]:
-        return self.__actual_inputs
+        """The specific input/output variables that matched the input templates."""
+        return self._actual_inputs
 
     @property
     def actual_outputs(self) -> list[TemplateValue]:
-        return self.__actual_outputs
+        """The specific input/output variables this layer will produce."""
+        return self._actual_outputs
 
     @property
     def predecessors(self) -> list[Self]:
-        return self.__predecessors
+        """Other layers that must execute before this one."""
+        return self._predecessors
 
     def debug(self, debug: bool = None) -> bool:
+        """Enables or disables debug mode."""
         if debug is not None:
-            self.__debug = debug
-        return self.__debug
+            self._debug = debug
+        return self._debug
 
     def __repr__(self):
-        return (f"{self.__class__.__name__} {self.name}, \n"
-                f"- Inputs: {self.inputs} -> {self.__actual_inputs}, \n"
-                f"- Outputs: {self.outputs} -> {self.__actual_outputs} \n"
-                f"- Predecessors: {[l.name for l in self.predecessors]}")
+        return (f"{self.__class__.__name__} {self._name}, \n"
+                f"- Inputs: {self._inputs} -> {self._actual_inputs}, \n"
+                f"- Outputs: {self._outputs} -> {self._actual_outputs} \n"
+                f"- Predecessors: {[l.name for l in self._predecessors]}")

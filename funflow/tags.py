@@ -4,6 +4,12 @@ TAG_VALUE_SEPARATOR = ":"
 
 
 def get_tag_name(tag_str: str):
+    """
+    Extract the tag name from a tag string (e.g., 'version: 1' -> 'version').
+
+    :param tag_str: The string representation of a tag.
+    :return: The stripped tag name.
+    """
     if TAG_VALUE_SEPARATOR not in tag_str:
         return tag_str.strip()
 
@@ -11,7 +17,19 @@ def get_tag_name(tag_str: str):
 
 
 class Tag:
+    """
+    Represents a metadata tag associated with an input/output variable (e.g., version: 1).
+    A tag consists of a name and a value.
+    """
+
     def __init__(self, name: str = None, value: str = None):
+        """
+        Initialize a Tag. Can be initialized with separate name and value, 
+        or a single string in 'name: value' format.
+
+        :param name: Tag name or a full 'name: value' string.
+        :param value: Tag value. If None, 'name' must contain the full string.
+        """
         if value is None:
             assert TAG_VALUE_SEPARATOR in name, "At least one between name and value must contain the Tag value!"
 

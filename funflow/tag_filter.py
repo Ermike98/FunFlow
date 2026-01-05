@@ -3,10 +3,25 @@ from .tags import Tag, TAG_VALUE_SEPARATOR, get_tag_name
 
 
 class TagFilter(ABC):
+    """
+    Abstract base class for tag filters used in Templates to match input/output variables.
+    """
+
     def __init__(self, name: str):
+        """
+        Initialize a TagFilter.
+
+        :param name: The name of the tag this filter applies to.
+        """
         self._name = name.strip()
 
     def match(self, tag: str | Tag):
+        """
+        Check if the provided tag matches this filter.
+
+        :param tag: A Tag object or a string representation of a tag.
+        :return: True if the tag matches, False otherwise.
+        """
         if isinstance(tag, str):
             tag = Tag(tag)
 
@@ -14,6 +29,7 @@ class TagFilter(ABC):
 
     @abstractmethod
     def _match(self, tag: Tag) -> bool:
+        """Internal match implementation."""
         pass
 
     @property
@@ -30,6 +46,11 @@ class TagFilter(ABC):
 
 
 class NoTagFilter(TagFilter):
+    """
+    Filter that matches any tag name regardless of its value.
+    In string representation, it looks like 'tag_name: {}'.
+    """
+
     def __init__(self, name: str):
         super().__init__(name)
 
@@ -44,6 +65,11 @@ class NoTagFilter(TagFilter):
 
 
 class ValueTagFilter(TagFilter):
+    """
+    Filter that matches a tag name with a specific value.
+    In string representation, it looks like 'tag_name: {value}'.
+    """
+
     def __init__(self, name: str, value: str):
         super().__init__(name)
         self.__value = value
