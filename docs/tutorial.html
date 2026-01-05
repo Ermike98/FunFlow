@@ -3,11 +3,11 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Layer" href="layer.html" /><link rel="prev" title="Getting Started" href="getting_started.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Advanced Features" href="advanced.html" /><link rel="prev" title="Getting Started" href="getting_started.html" />
 
     <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
         <title>Tutorial - funflow 0.0.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -198,18 +198,12 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Sections:</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Tutorial</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorial</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="layer.html">Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html">Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functional.html">Functional Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="grid_map.html">Grid Map Layer</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Topic</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Features</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="funflow.html">funflow package</a></li>
 </ul>
 </li>
@@ -247,7 +241,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -255,14 +249,123 @@
         <article role="main" id="furo-main-content">
           <section id="tutorial">
 <h1>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="layer.html">Layer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="model.html">Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functional.html">Functional Layer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="grid_map.html">Grid Map Layer</a></li>
-</ul>
+<section id="basic-concepts">
+<h2>Basic Concepts<a class="headerlink" href="#basic-concepts" title="Link to this heading">¶</a></h2>
+<p>FunFlow is built around several core concepts. For detailed information on each, see the respective pages:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="layer.html"><span class="doc">Layer</span></a>: Basic building blocks of computation</p></li>
+<li><p><a class="reference internal" href="model.html"><span class="doc">Model</span></a>: Containers that organize and connect layers</p></li>
+<li><p><a class="reference internal" href="functional.html"><span class="doc">Functional Layer</span></a>: Quickly wrap existing functions</p></li>
+<li><p><a class="reference internal" href="grid_map.html"><span class="doc">Grid Map Layer</span></a>: Tools for iteration and parallel processing</p></li>
+<li><p><a class="reference internal" href="advanced.html"><span class="doc">Advanced Features</span></a>: Dynamic patterns and flexible data flow with Templates</p></li>
+</ol>
+</section>
+<section id="creating-a-simple-pipeline">
+<h2>Creating a Simple Pipeline<a class="headerlink" href="#creating-a-simple-pipeline" title="Link to this heading">¶</a></h2>
+<p>Here’s a complete example of building a data processing pipeline:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">funflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ff</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Create a simple regression pipeline</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">data</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">Model</span><span class="p">([</span>
+    <span class="n">ff</span><span class="o">.</span><span class="n">Functional</span><span class="p">(</span><span class="n">normalize</span><span class="p">,</span>
+                 <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;X_train&quot;</span><span class="p">],</span>
+                 <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;X_train_normalized&quot;</span><span class="p">]),</span>
+    <span class="n">ff</span><span class="o">.</span><span class="n">Functional</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+                 <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;X_train_normalized&quot;</span><span class="p">],</span>
+                 <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;trained_model&quot;</span><span class="p">])</span>
+<span class="p">])</span>
+</pre></div>
 </div>
+</section>
+<section id="working-with-templates">
+<h2>Working with Templates<a class="headerlink" href="#working-with-templates" title="Link to this heading">¶</a></h2>
+<p>Templates are powerful tools for creating flexible data flows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define templates for different data types</span>
+<span class="n">raw_data</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">Template</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">ff</span><span class="o">.</span><span class="n">Tag</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;raw&quot;</span><span class="p">)])</span>
+<span class="n">normalized_data</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">Template</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">ff</span><span class="o">.</span><span class="n">Tag</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;normalized&quot;</span><span class="p">)])</span>
+
+<span class="c1"># Use templates in your pipeline</span>
+<span class="n">normalization</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">Functional</span><span class="p">(</span>
+    <span class="n">normalize</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">raw_data</span><span class="p">],</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">normalized_data</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="advanced-usage">
+<h2>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Link to this heading">¶</a></h2>
+<section id="grid-mapping">
+<h3>Grid Mapping<a class="headerlink" href="#grid-mapping" title="Link to this heading">¶</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">GridMap</span></code> to run a function over all combinations of inputs in the state. For example, if you have multiple datasets:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">funflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridMap</span><span class="p">,</span> <span class="n">Template</span><span class="p">,</span> <span class="n">NoTagFilter</span>
+
+<span class="c1"># This layer will run for every variable named &#39;data&#39; that has a &#39;batch&#39; tag</span>
+<span class="n">grid_layer</span> <span class="o">=</span> <span class="n">GridMap</span><span class="p">(</span>
+    <span class="n">process_func</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">Template</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="p">[</span><span class="n">NoTagFilter</span><span class="p">(</span><span class="s2">&quot;batch&quot;</span><span class="p">)])],</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">Template</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="p">[</span><span class="n">NoTagFilter</span><span class="p">(</span><span class="s2">&quot;batch&quot;</span><span class="p">)])]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="visualization">
+<h3>Visualization<a class="headerlink" href="#visualization" title="Link to this heading">¶</a></h3>
+<p>Visualize your pipeline:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create and visualize the computation graph</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_graph</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">nx_agraph</span><span class="o">.</span><span class="n">to_agraph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">A</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s1">&#39;pipeline.png&#39;</span><span class="p">,</span> <span class="n">prog</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="real-world-example">
+<h2>Real-World Example<a class="headerlink" href="#real-world-example" title="Link to this heading">¶</a></h2>
+<p>Here’s a complete example of a machine learning pipeline:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">funflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ff</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="c1"># Define templates</span>
+<span class="n">untrained_model</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">Template</span><span class="p">(</span><span class="s2">&quot;untrained_model&quot;</span><span class="p">)</span>
+<span class="n">trained_model</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">Template</span><span class="p">(</span><span class="s2">&quot;trained_model&quot;</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">Template</span><span class="p">(</span><span class="s2">&quot;predictions&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create layers</span>
+<span class="n">fit_layer</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">Functional</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">untrained_model</span><span class="p">,</span> <span class="s2">&quot;X_train&quot;</span><span class="p">,</span> <span class="s2">&quot;y_train&quot;</span><span class="p">],</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">trained_model</span><span class="p">],</span>
+    <span class="n">call_type</span><span class="o">=</span><span class="s2">&quot;args&quot;</span>
+<span class="p">)</span>
+
+<span class="n">predict_layer</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">Functional</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">),</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">trained_model</span><span class="p">,</span> <span class="s2">&quot;X_test&quot;</span><span class="p">],</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">predictions</span><span class="p">],</span>
+    <span class="n">call_type</span><span class="o">=</span><span class="s2">&quot;args&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Combine into model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">fit_layer</span><span class="p">,</span> <span class="n">predict_layer</span><span class="p">],</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">untrained_model</span><span class="p">,</span> <span class="s2">&quot;X_train&quot;</span><span class="p">,</span> <span class="s2">&quot;y_train&quot;</span><span class="p">,</span> <span class="s2">&quot;X_test&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Use the model</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span>
+    <span class="n">untrained_model</span><span class="o">=</span><span class="n">LinearRegression</span><span class="p">(),</span>
+    <span class="n">X_train</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+    <span class="n">X_test</span><span class="o">=</span><span class="n">X_test</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 
         </article>
@@ -270,12 +373,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="layer.html">
+          <a class="next-page" href="advanced.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Layer</div>
+                <div class="title">Advanced Features</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -308,8 +411,35 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Tutorial</a><ul>
+<li><a class="reference internal" href="#basic-concepts">Basic Concepts</a></li>
+<li><a class="reference internal" href="#creating-a-simple-pipeline">Creating a Simple Pipeline</a></li>
+<li><a class="reference internal" href="#working-with-templates">Working with Templates</a></li>
+<li><a class="reference internal" href="#advanced-usage">Advanced Usage</a><ul>
+<li><a class="reference internal" href="#grid-mapping">Grid Mapping</a></li>
+<li><a class="reference internal" href="#visualization">Visualization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#real-world-example">Real-World Example</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

@@ -7,7 +7,7 @@
 
     <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
         <title>funflow package - funflow 0.0.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -198,18 +198,12 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Sections:</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="tutorial.html">Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorial</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="layer.html">Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html">Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functional.html">Functional Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="grid_map.html">Grid Map Layer</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Topic</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Features</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">funflow package</a></li>
 </ul>
 </li>
@@ -264,10 +258,12 @@
 <dt class="sig sig-object py" id="funflow.functional.Functional">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">funflow.functional.</span></span><span class="sig-name descname"><span class="pre">Functional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">call_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'args'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.functional.Functional" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#funflow.layer.Layer" title="funflow.layer.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a></p>
+<p>A layer that wraps a standard Python function or lambda.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.functional.Functional.call">
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.functional.Functional.call" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Invoke the wrapped function.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -278,10 +274,13 @@
 <dt class="sig sig-object py" id="funflow.grid_map.GridMap">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">funflow.grid_map.</span></span><span class="sig-name descname"><span class="pre">GridMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_input_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'args'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_output_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tuple'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.grid_map.GridMap" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#funflow.layer.Layer" title="funflow.layer.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a></p>
+<p>A layer that executes its function over the Cartesian product of all possible combinations of inputs based on their tags.
+Useful for batch processing or hyperparameter sweeps.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.grid_map.GridMap.call">
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.grid_map.GridMap.call" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Iterates over input combinations and collects results into the global state.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -291,47 +290,69 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="funflow.layer.Layer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">funflow.layer.</span></span><span class="sig-name descname"><span class="pre">Layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'kwargs'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">call_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.layer.Layer" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Abstract base class for all layers.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for all layers in a FunFlow pipeline.
+A layer defines a transformation from inputs to outputs.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="funflow.layer.Layer.actual_inputs">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">actual_inputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.templates.TemplateValue" title="funflow.templates.TemplateValue"><span class="pre">TemplateValue</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#funflow.layer.Layer.actual_inputs" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The specific input/output variables that matched the input templates.</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="funflow.layer.Layer.actual_outputs">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">actual_outputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.templates.TemplateValue" title="funflow.templates.TemplateValue"><span class="pre">TemplateValue</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#funflow.layer.Layer.actual_outputs" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The specific input/output variables this layer will produce.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.layer.Layer.call">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#funflow.layer.Layer.call" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Perform the layer’s transformation.
+Should be implemented by subclasses.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.layer.Layer.debug">
 <span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#funflow.layer.Layer.debug" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Enables or disables debug mode.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="funflow.layer.Layer.id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#funflow.layer.Layer.id" title="Link to this definition">¶</a></dt>
+<dd><p>The unique ID of the layer.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.layer.Layer.init">
 <span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_producers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Self</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#funflow.layer.Layer.init" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Initializes actual inputs and outputs based on context.</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="funflow.layer.Layer.inputs">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#funflow.layer.Layer.inputs" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The input templates defined for this layer.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="funflow.layer.Layer.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#funflow.layer.Layer.name" title="Link to this definition">¶</a></dt>
+<dd><p>The name of the layer.</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="funflow.layer.Layer.outputs">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.templates.Template" title="funflow.templates.Template"><span class="pre">Template</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#funflow.layer.Layer.outputs" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The output templates defined for this layer.</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="funflow.layer.Layer.predecessors">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">predecessors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Self</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#funflow.layer.Layer.predecessors" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Other layers that must execute before this one.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -345,7 +366,9 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.map.Map.call">
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.map.Map.call" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Perform the layer’s transformation.
+Should be implemented by subclasses.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -356,20 +379,50 @@
 <dt class="sig sig-object py" id="funflow.model.Model">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">funflow.model.</span></span><span class="sig-name descname"><span class="pre">Model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#funflow.layer.Layer" title="funflow.layer.Layer"><span class="pre">Layer</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.layer.Layer" title="funflow.layer.Layer"><span class="pre">Layer</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.model.Model" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#funflow.layer.Layer" title="funflow.layer.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a></p>
+<p>A Model is a collection of layers from which a working computation graph can be extracted.
+It manages the execution flow and the shared state between layers.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.model.Model.add_layer">
 <span class="sig-name descname"><span class="pre">add_layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#funflow.layer.Layer" title="funflow.layer.Layer"><span class="pre">Layer</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#funflow.model.Model.add_layer" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Add a layer to the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>layer</strong> – The Layer instance to add.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self, for chaining.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.model.Model.call">
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#funflow.model.Model.call" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Execute the model’s pipeline.
+Calculates the topological order of layers and runs them in sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kwargs</strong> – Initial state values (inputs).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the final state after all layers execute.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.model.Model.create_graph">
 <span class="sig-name descname"><span class="pre">create_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.model.Model.create_graph" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Generate a NetworkX directed graph representation of the pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>inputs</strong> – Sample inputs to resolve dynamic templates.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A networkx.DiGraph object.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -383,7 +436,9 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.rename.Rename.call">
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.rename.Rename.call" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Perform the layer’s transformation.
+Should be implemented by subclasses.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -394,16 +449,28 @@
 <dt class="sig sig-object py" id="funflow.tag_filter.NoTagFilter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">funflow.tag_filter.</span></span><span class="sig-name descname"><span class="pre">NoTagFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.tag_filter.NoTagFilter" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#funflow.tag_filter.TagFilter" title="funflow.tag_filter.TagFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">TagFilter</span></code></a></p>
+<p>Filter that matches any tag name regardless of its value.
+In string representation, it looks like ‘tag_name: {}’.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="funflow.tag_filter.TagFilter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">funflow.tag_filter.</span></span><span class="sig-name descname"><span class="pre">TagFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.tag_filter.TagFilter" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for tag filters used in Templates to match input/output variables.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.tag_filter.TagFilter.match">
 <span class="sig-name descname"><span class="pre">match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#funflow.tags.Tag" title="funflow.tags.Tag"><span class="pre">Tag</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.tag_filter.TagFilter.match" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check if the provided tag matches this filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tag</strong> – A Tag object or a string representation of a tag.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the tag matches, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="funflow.tag_filter.TagFilter.name">
@@ -416,6 +483,8 @@
 <dt class="sig sig-object py" id="funflow.tag_filter.ValueTagFilter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">funflow.tag_filter.</span></span><span class="sig-name descname"><span class="pre">ValueTagFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.tag_filter.ValueTagFilter" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#funflow.tag_filter.TagFilter" title="funflow.tag_filter.TagFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">TagFilter</span></code></a></p>
+<p>Filter that matches a tag name with a specific value.
+In string representation, it looks like ‘tag_name: {value}’.</p>
 </dd></dl>
 
 </section>
@@ -425,6 +494,8 @@
 <dt class="sig sig-object py" id="funflow.tags.Tag">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">funflow.tags.</span></span><span class="sig-name descname"><span class="pre">Tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.tags.Tag" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a metadata tag associated with an input/output variable (e.g., version: 1).
+A tag consists of a name and a value.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="funflow.tags.Tag.name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#funflow.tags.Tag.name" title="Link to this definition">¶</a></dt>
@@ -440,7 +511,16 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="funflow.tags.get_tag_name">
 <span class="sig-prename descclassname"><span class="pre">funflow.tags.</span></span><span class="sig-name descname"><span class="pre">get_tag_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.tags.get_tag_name" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Extract the tag name from a tag string (e.g., ‘version: 1’ -&gt; ‘version’).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tag_str</strong> – The string representation of a tag.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The stripped tag name.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-funflow.template_engine">
@@ -520,35 +600,68 @@
 <dt class="sig sig-object py" id="funflow.templates.Template">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">funflow.templates.</span></span><span class="sig-name descname"><span class="pre">Template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.tags.Tag" title="funflow.tags.Tag"><span class="pre">Tag</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.tag_filter.TagFilter" title="funflow.tag_filter.TagFilter"><span class="pre">TagFilter</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.templates.Template" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a pattern for matching and instantiating TemplateValues.
+Used by Layers to specify dynamic inputs and outputs.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.templates.Template.instantiate">
 <span class="sig-name descname"><span class="pre">instantiate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.tags.Tag" title="funflow.tags.Tag"><span class="pre">Tag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#funflow.templates.TemplateValue" title="funflow.templates.TemplateValue"><span class="pre">TemplateValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#funflow.templates.Template.instantiate" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Create a TemplateValue by merging these template’s static tags 
+with the provided tags, if they satisfy the filters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tags</strong> – Dynamic tags from the state context.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A TemplateValue if it matches filters, or None.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.templates.Template.match">
 <span class="sig-name descname"><span class="pre">match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">templ_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#funflow.templates.TemplateValue" title="funflow.templates.TemplateValue"><span class="pre">TemplateValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#funflow.templates.Template.match" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check if a TemplateValue (or its string representation) matches this pattern.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>templ_value</strong> – The value to check.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if base name matches and all filters pass.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.templates.Template.match_tags">
 <span class="sig-name descname"><span class="pre">match_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.tags.Tag" title="funflow.tags.Tag"><span class="pre">Tag</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#funflow.templates.Template.match_tags" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check if a set of tags satisfies all the filters in this template.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tags</strong> – The tags to check.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if all filters find a match, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="funflow.templates.Template.name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#funflow.templates.Template.name" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The base name of the template.</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="funflow.templates.Template.tag_filters">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tag_filters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.tag_filter.TagFilter" title="funflow.tag_filter.TagFilter"><span class="pre">TagFilter</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#funflow.templates.Template.tag_filters" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>A list of tag filters.</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="funflow.templates.Template.tags">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.tags.Tag" title="funflow.tags.Tag"><span class="pre">Tag</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#funflow.templates.Template.tags" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>A list of static tags.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -556,20 +669,33 @@
 <dt class="sig sig-object py" id="funflow.templates.TemplateValue">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">funflow.templates.</span></span><span class="sig-name descname"><span class="pre">TemplateValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.tags.Tag" title="funflow.tags.Tag"><span class="pre">Tag</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.templates.TemplateValue" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents an instantiated input/output variable name with its associated tags.
+(e.g., ‘data, version: 1, type: raw’)</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="funflow.templates.TemplateValue.name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#funflow.templates.TemplateValue.name" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The base name of the variable.</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="funflow.templates.TemplateValue.tags">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#funflow.tags.Tag" title="funflow.tags.Tag"><span class="pre">Tag</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#funflow.templates.TemplateValue.tags" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>A sorted list of Tag objects.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="funflow.templates.TemplateValue.to_dict">
 <span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#funflow.templates.TemplateValue.to_dict" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Convert the TemplateValue to a dictionary mapping tag names to values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>include_name</strong> – Whether to include the base name in the dictionary.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary representation.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -653,8 +779,10 @@
 <li><a class="reference internal" href="#funflow.layer.Layer.actual_outputs"><code class="docutils literal notranslate"><span class="pre">Layer.actual_outputs</span></code></a></li>
 <li><a class="reference internal" href="#funflow.layer.Layer.call"><code class="docutils literal notranslate"><span class="pre">Layer.call()</span></code></a></li>
 <li><a class="reference internal" href="#funflow.layer.Layer.debug"><code class="docutils literal notranslate"><span class="pre">Layer.debug()</span></code></a></li>
+<li><a class="reference internal" href="#funflow.layer.Layer.id"><code class="docutils literal notranslate"><span class="pre">Layer.id</span></code></a></li>
 <li><a class="reference internal" href="#funflow.layer.Layer.init"><code class="docutils literal notranslate"><span class="pre">Layer.init()</span></code></a></li>
 <li><a class="reference internal" href="#funflow.layer.Layer.inputs"><code class="docutils literal notranslate"><span class="pre">Layer.inputs</span></code></a></li>
+<li><a class="reference internal" href="#funflow.layer.Layer.name"><code class="docutils literal notranslate"><span class="pre">Layer.name</span></code></a></li>
 <li><a class="reference internal" href="#funflow.layer.Layer.outputs"><code class="docutils literal notranslate"><span class="pre">Layer.outputs</span></code></a></li>
 <li><a class="reference internal" href="#funflow.layer.Layer.predecessors"><code class="docutils literal notranslate"><span class="pre">Layer.predecessors</span></code></a></li>
 </ul>

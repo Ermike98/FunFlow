@@ -7,7 +7,7 @@
 
     <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
         <title>funflow 0.0.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -198,18 +198,12 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Sections:</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="tutorial.html">Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorial</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="layer.html">Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html">Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functional.html">Functional Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="grid_map.html">Grid Map Layer</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Topic</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Features</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="funflow.html">funflow package</a></li>
 </ul>
 </li>
@@ -247,43 +241,74 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="welcome-to-funflow-s-documentation">
-<h1>Welcome to funflow’s documentation!<a class="headerlink" href="#welcome-to-funflow-s-documentation" title="Link to this heading">¶</a></h1>
-<p><strong>Funflow</strong> is a python library to create complex pipelines easily!</p>
-<p>This Python library empowers developers to effortlessly design and manage complex data pipelines.
-Inspired by the dataflow programming paradigm, it transforms the way you build workflows by organizing them into pipelines <code class="docutils literal notranslate"><span class="pre">Model</span></code> composed of nodes <code class="docutils literal notranslate"><span class="pre">Layer</span></code>, each transforming inputs into outputs.
-At the heart of this library is its flexible templating system for input management, which does away with the limitations of rigid, fixed input names and gives you unprecedented flexibility and control.
-Whether you’re orchestrating simple tasks or architecting large-scale systems, this tool takes the complexity out of pipelines, letting you focus on what really matters - delivering results!</p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Sections:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation">Installation</a></li>
+          <section id="welcome-to-funflow">
+<h1>Welcome to Funflow!<a class="headerlink" href="#welcome-to-funflow" title="Link to this heading">¶</a></h1>
+<p><strong>Funflow</strong> is a powerful Python library that simplifies complex pipeline creation and management.</p>
+<section id="why-funflow">
+<h2>🚀 Why Funflow?<a class="headerlink" href="#why-funflow" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Intuitive Pipeline Design</strong>: Build data pipelines using a clear, dataflow-inspired approach</p></li>
+<li><p><strong>Modular Architecture</strong>: Organize your workflow with <code class="docutils literal notranslate"><span class="pre">Model</span></code> and <code class="docutils literal notranslate"><span class="pre">Layer</span></code> components</p></li>
+<li><p><strong>Production Ready</strong>: Scale from simple tasks to enterprise-level systems</p></li>
+<li><p><strong>Developer Friendly</strong>: Minimal boilerplate, maximum productivity</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="layer.html">Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html">Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functional.html">Functional Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="grid_map.html">Grid Map Layer</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Topic</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="advanced.html#how-to-create-custom-layers">How to create Custom Layers</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="funflow.html">funflow package</a></li>
-</ul>
-</li>
-</ul>
+</section>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">funflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Functional</span>
+
+<span class="c1"># Create a simple pipeline</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">data</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">layers</span><span class="o">=</span><span class="p">[</span>
+    <span class="n">Functional</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="c1"># Run your pipeline</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span> <span class="c1"># Output: 20</span>
+</pre></div>
 </div>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>funflow
+</pre></div>
+</div>
+</section>
+<section id="core-features">
+<h2>Core Features<a class="headerlink" href="#core-features" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Modular Design</strong>: Build complex workflows from simple, reusable layers.</p></li>
+<li><p><strong>Flexible Templating</strong>: Decouple layer implementation from data routing using a powerful tag-based system.</p></li>
+<li><p><strong>Dynamic Routing</strong>: Automatically route data through the pipeline based on templates and state tags.</p></li>
+<li><p><strong>Functional API</strong>: Quickly create layers from standard Python functions or lambdas.</p></li>
+<li><p><strong>Grid Mapping</strong>: Effortlessly run computations over combinations of inputs for batch processing or hyperparameter tuning.</p></li>
+<li><p><strong>Visual Tools</strong>: Built-in capabilities to visualize your computation graph.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="get-involved">
+<h2>Get Involved<a class="headerlink" href="#get-involved" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/Ermike98/FunFlow">GitHub Repository</a></p></li>
+<li><p><a class="reference external" href="https://github.com/Ermike98/FunFlow/issues">Report Issues</a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Funflow is actively maintained and welcomes contributions from the community!</p>
+</div>
+</section>
 </section>
 
         </article>
@@ -319,8 +344,33 @@ Whether you’re orchestrating simple tasks or architecting large-scale systems,
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Welcome to Funflow!</a><ul>
+<li><a class="reference internal" href="#why-funflow">🚀 Why Funflow?</a></li>
+<li><a class="reference internal" href="#quick-start">Quick Start</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#core-features">Core Features</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#get-involved">Get Involved</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

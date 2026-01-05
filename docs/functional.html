@@ -3,11 +3,11 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Grid Map Layer" href="grid_map.html" /><link rel="prev" title="Model" href="model.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
         <title>Functional Layer - funflow 0.0.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -198,18 +198,12 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Sections:</span></p>
-<ul class="current">
+  <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="tutorial.html">Tutorial</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorial</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="layer.html">Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html">Model</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Functional Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="grid_map.html">Grid Map Layer</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Topic</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Features</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="funflow.html">funflow package</a></li>
 </ul>
 </li>
@@ -247,7 +241,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -255,6 +249,37 @@
         <article role="main" id="furo-main-content">
           <section id="functional-layer">
 <h1>Functional Layer<a class="headerlink" href="#functional-layer" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">Functional</span></code> layer is a convenient way to wrap existing Python functions or lambdas as FunFlow layers.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>Instead of subclassing <code class="docutils literal notranslate"><span class="pre">Layer</span></code> for every simple transformation, you can use <code class="docutils literal notranslate"><span class="pre">Functional</span></code> to quickly integrate your logic into a pipeline.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">funflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Functional</span>
+
+<span class="c1"># Wrapping a lambda</span>
+<span class="n">l1</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s1">&#39;val&#39;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s1">&#39;val_10&#39;</span><span class="p">)</span>
+
+<span class="c1"># Wrapping a standard function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
+    <span class="c1"># ... logic ...</span>
+    <span class="k">return</span> <span class="n">processed_data</span>
+
+<span class="n">l2</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="n">process_data</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s1">&#39;raw&#39;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s1">&#39;clean&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>func</strong>: The Python function or callable to wrap.</p></li>
+<li><p><strong>inputs</strong>: Mapping for the function’s arguments.</p></li>
+<li><p><strong>outputs</strong>: Mapping for the function’s return value.</p></li>
+<li><p><strong>call_type</strong>: (default: “args”) How the function is called. Can be “args” (positional) or “kwargs” (keyword).</p></li>
+<li><p><strong>**kwargs</strong>: Additional arguments passed to the <code class="docutils literal notranslate"><span class="pre">Layer</span></code> base class.</p></li>
+</ul>
+</section>
 </section>
 
         </article>
@@ -262,26 +287,8 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="grid_map.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Grid Map Layer</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="model.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">Model</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -300,8 +307,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Functional Layer</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

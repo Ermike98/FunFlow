@@ -3,11 +3,11 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="API" href="modules.html" /><link rel="prev" title="Grid Map Layer" href="grid_map.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="API" href="modules.html" /><link rel="prev" title="Tutorial" href="tutorial.html" />
 
     <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
-        <title>Advanced Topic - funflow 0.0.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+        <title>Advanced Features - funflow 0.0.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -198,18 +198,12 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Sections:</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="tutorial.html">Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorial</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="layer.html">Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html">Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functional.html">Functional Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="grid_map.html">Grid Map Layer</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Advanced Topic</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Advanced Features</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="funflow.html">funflow package</a></li>
 </ul>
 </li>
@@ -253,11 +247,64 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="advanced-topic">
-<h1>Advanced Topic<a class="headerlink" href="#advanced-topic" title="Link to this heading">¶</a></h1>
-<section id="how-to-create-custom-layers">
-<h2>How to create Custom Layers<a class="headerlink" href="#how-to-create-custom-layers" title="Link to this heading">¶</a></h2>
-<p>Create a subclass of Layer.</p>
+          <section id="advanced-features">
+<h1>Advanced Features<a class="headerlink" href="#advanced-features" title="Link to this heading">¶</a></h1>
+<p>FunFlow’s advanced features allow for highly dynamic and flexible pipeline architectures through a powerful templating engine and dynamic routing system.</p>
+<section id="templating-system">
+<h2>Templating System<a class="headerlink" href="#templating-system" title="Link to this heading">¶</a></h2>
+<p>The templating system decouples the internal logic of a layer from the names of the variables in the global state. This allows you to write generic layers that can be applied to many different data sources.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">funflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Template</span><span class="p">,</span> <span class="n">Tag</span><span class="p">,</span> <span class="n">NoTagFilter</span>
+
+<span class="c1"># A template that matches the name &quot;data&quot; and MUST have a tag &quot;version&quot;</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="p">[</span><span class="n">NoTagFilter</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">)])</span>
+
+<span class="c1"># You can instantiate it with a specific tag value</span>
+<span class="n">val</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">instantiate</span><span class="p">([</span><span class="n">Tag</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">))</span> <span class="c1"># Output: data, version: 1</span>
+</pre></div>
+</div>
+</section>
+<section id="dynamic-routing">
+<h2>Dynamic Routing<a class="headerlink" href="#dynamic-routing" title="Link to this heading">¶</a></h2>
+<p>By using templates in the <code class="docutils literal notranslate"><span class="pre">inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">outputs</span></code> of layers, you can create pipelines where data is routed based on tags. FunFlow automatically resolves the templates based on the available data in the model’s state.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">funflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Functional</span><span class="p">,</span> <span class="n">Template</span><span class="p">,</span> <span class="n">NoTagFilter</span>
+
+<span class="c1"># This layer takes &#39;input&#39; with any &#39;id&#39; and produces &#39;output&#39; with the same &#39;id&#39;</span>
+<span class="c1"># FunFlow will automatically resolve &#39;id&#39; from the available state tags.</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+               <span class="n">inputs</span><span class="o">=</span><span class="n">Template</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="p">[</span><span class="n">NoTagFilter</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)]),</span>
+               <span class="n">outputs</span><span class="o">=</span><span class="n">Template</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="p">[</span><span class="n">NoTagFilter</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)]))</span>
+</pre></div>
+</div>
+</section>
+<section id="tag-filters">
+<h2>Tag Filters<a class="headerlink" href="#tag-filters" title="Link to this heading">¶</a></h2>
+<p>Tag filters allow you to select specific data subsets from the state based on complex criteria.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">funflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValueTagFilter</span><span class="p">,</span> <span class="n">NoTagFilter</span>
+
+<span class="c1"># Match a specific tag value</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">ValueTagFilter</span><span class="p">(</span><span class="s2">&quot;experiment&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>
+
+<span class="c1"># Match any tag value for a given name</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="n">NoTagFilter</span><span class="p">(</span><span class="s2">&quot;session_id&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="custom-layer-development">
+<h2>Custom Layer Development<a class="headerlink" href="#custom-layer-development" title="Link to this heading">¶</a></h2>
+<p>Beyond the functional API, you can create fully custom layers by inheriting from the <code class="docutils literal notranslate"><span class="pre">Layer</span></code> class. This gives you maximum control over the initialization and execution logic.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">funflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Layer</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CustomLayer</span><span class="p">(</span><span class="n">Layer</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Custom initialization...</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Custom processing...</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">}</span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -275,14 +322,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="grid_map.html">
+          <a class="prev-page" href="tutorial.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Grid Map Layer</div>
+                <div class="title">Tutorial</div>
                 
               </div>
             </a>
@@ -316,8 +363,11 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Advanced Topic</a><ul>
-<li><a class="reference internal" href="#how-to-create-custom-layers">How to create Custom Layers</a></li>
+<li><a class="reference internal" href="#">Advanced Features</a><ul>
+<li><a class="reference internal" href="#templating-system">Templating System</a></li>
+<li><a class="reference internal" href="#dynamic-routing">Dynamic Routing</a></li>
+<li><a class="reference internal" href="#tag-filters">Tag Filters</a></li>
+<li><a class="reference internal" href="#custom-layer-development">Custom Layer Development</a></li>
 </ul>
 </li>
 </ul>
