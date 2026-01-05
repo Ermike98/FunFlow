@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name='funflow',
-    version='0.0.2',
+    version='0.0.3',
     description='Powerful dataflow programming library',
     long_description=pathlib.Path('README.md').read_text(),
     long_description_content_type='text/markdown',
